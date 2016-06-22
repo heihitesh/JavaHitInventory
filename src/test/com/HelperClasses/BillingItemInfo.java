@@ -5,7 +5,7 @@ package test.com.HelperClasses;
  */
 public class BillingItemInfo {
     private String itemName , quantity, category;
-    int n_price ,s_price,total=1000;
+    int n_price ,s_price,total=100;
     int sr;
 
     public BillingItemInfo(int sr, String item_name, String quantity, String category, int n_price, int s_price, int total){
