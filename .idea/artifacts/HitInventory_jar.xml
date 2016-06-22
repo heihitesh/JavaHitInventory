@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="HitInventory:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HitInventory_jar</output-path>
+    <root id="archive" name="HitInventory.jar">
+      <element id="module-output" name="HitInventory" />
+      <element id="library" level="project" name="src" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jgoodies-forms.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/jgoodies-common.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/swing-layout.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,43 @@
+JFDML JFormDesigner: "5.2.3.0.281" Java: "1.8.0_65" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {par l {seq t {space :::p, comp scrollPane1::::712:x}, seq {par l {seq {space :p:303:p, comp label2:::p::p, space s:::p, comp tvBillTotal:::p:158:p}, seq l {space :p:27:p, comp tvBillMadeBy:::p:117:p, space :p:195:p, comp label1:::p:46:p, space :p:182:p, comp tvBillID:::p::p}}, space :0:119:x}}, space :::p}}"
+			"$verticalGroup": "par l {seq l {par l {seq {space :::p, par b {comp tvBillMadeBy::b:p:29:p, comp tvBillID::b:p::p}}, comp label1::l:p:40:p}, space :p:66:p, comp scrollPane1:::p:200:p, space s:::p, par b {comp label2::b:p::p, comp tvBillTotal::b:p::p}, space ::161:x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Bill"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 6, false )
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTable" ) {
+					name: "table1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "total:-"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "tvBillTotal"
+				"text": "....................."
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "tvBillMadeBy"
+				"text": "Name"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "tvBillID"
+				"text": "Bill Id:"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 740, 540 )
+		} )
+	}
+}

@@ -1,0 +1,136 @@
+JFDML JFormDesigner: "5.2.3.0.281" Java: "1.8.0_65" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp tabbedPane1::l:::x}"
+			"$verticalGroup": "par l {comp tabbedPane1::l:::x}"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {space ::59:x, par l {seq t {par t {comp label2:::p::p, par l:t {comp loginRWorker:::p::p, comp label3:::p::p}}, par l {seq t {space :::p, comp loginRManager:::p::p, space :p:87:p}, seq l {space :p:77:p, par l:::p {comp loginLUName::::129:x, comp loginLPass::::129:x}, space :p:47:p}}}, seq t {comp label1:::p::p, space :p:183:p}, seq t {comp loginBLogin:::p::p, space :p:175:p}}}}"
+					"$verticalGroup": "par l {seq l {comp label1:::p::p, space :p:47:p, par t {comp label2:::p::p, comp loginLUName:::p::p}, space u:::p, par b {comp label3::b:p::p, comp loginLPass::b:p::p}, space s:::p, par b {comp loginRWorker::b:p::p, comp loginRManager::b:p::p}, space ::26:x, comp loginBLogin:::p::p, space :p:75:p}}"
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "LOGIN"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 3, false )
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "loginLUName"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "User Name :"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Password :"
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "loginRWorker"
+						"text": "Worker"
+						"selected": true
+						"$buttonGroup": new FormReference( "buttonGroup1" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "loginRWorkerActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JRadioButton" ) {
+						name: "loginRManager"
+						"text": "Manager"
+						"$buttonGroup": new FormReference( "buttonGroup1" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "loginRManagerActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "loginBLogin"
+						"text": "LOGIN"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bLogin", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "loginLPass"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "LOGIN"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq {par l {seq {space :::p, comp label5:::p::p, space :::p, par l {seq {par t {comp label9:::p::p, comp label8:::p::p, comp label11::t:p::p, comp label10::t:p::p, comp label7::t:p::p}, space :p:33:p, par l:::p {comp signUpLPass::::129:x, comp signUpLCPass::::129:x, comp signUPMasterKey::l::129:x, comp signUpLPhoneNo::l::129:x, comp signUpLUname::l::129:x}}, seq l {comp signUpLFirstName:::p:101:p, space :::p, comp label6:::p::p, space :::p, comp signUpLLastName:::p:109:p}}}, seq {space :p:141:p, comp label4:::p:94:p}}, space ::20:x}, seq t {space :0:150:x, comp signUpBSave:::p::p, space :p:161:p}}"
+					"$verticalGroup": "par l {seq l {comp label4:::p::p, space :p:12:p, par b {comp label5::b:p::p, comp signUpLFirstName::b:p::p, comp label6::b:p::p, comp signUpLLastName::b:p::p}, space :::p, par b {comp signUpLUname::b:p::p, comp label7::b:p::p}, space :::p, par b {comp signUpLPass::b:p::p, comp label8::b:p::p}, space :p:8:p, par b {comp signUpLCPass::b:p::p, comp label9::b:p::p}, space :::x, par b {comp signUpLPhoneNo::b:p::p, comp label11::b:p::p}, space u:::p, par b {comp signUPMasterKey::b:p::p, comp label10::b:p::p}, space :p:46:p, comp signUpBSave:::p::p, space :::p}}"
+				} ) {
+					name: "panel3"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "SIGN UP"
+						"font": new java.awt.Font( "Segoe UI", 1, 20 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "First Name : "
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "signUpLFirstName"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label6"
+						"text": "Last Name :"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "signUpLLastName"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label7"
+						"text": "User Name :"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "signUpLUname"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label8"
+						"text": "Password :"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label9"
+						"text": "Confirm Password :"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label10"
+						"text": "Master Key :"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "signUpBSave"
+						"text": "Sign Up"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bSignUp", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "signUpLPass"
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "signUpLCPass"
+					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "signUPMasterKey"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label11"
+						"text": "Phone No :"
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "signUpLPhoneNo"
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "SIGN UP"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+		add( new FormNonVisual( "javax.swing.ButtonGroup" ) {
+			name: "buttonGroup1"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 316 )
+		} )
+	}
+}
