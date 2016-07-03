@@ -79,7 +79,8 @@ public class dbsBilling {
         try {
             ResultSet myResultSet;
             //Selecting From the Data Base
-            PreparedStatement myPStmt = myConn.prepareStatement("select quantity,quantity_unit from hit.quantityAcctoItemName where item_name=?;");
+            PreparedStatement myPStmt = myConn.prepareStatement("select quantity,quantity_unit" +
+                    " from hit.quantityAcctoItemName where item_name=?;");
             myPStmt.setString(1, item_name);
             myResultSet = myPStmt.executeQuery();
             while (myResultSet.next()) {
@@ -94,55 +95,51 @@ public class dbsBilling {
         return (HashMap<String, String>) myMap;
     }
 
-    public HashMap<String,Integer>  getItemIDandSalesInfo(String item_name) {
-        Map<String, Integer> myMap = new HashMap<String, Integer>();
+    public Float getSalesInfo(String item_name) {
+        Float Price= Float.valueOf(0);
         try {
             ResultSet myResultSet;
             //Selecting From the Data Base
-            PreparedStatement myPStmt = myConn.prepareStatement("select * from hit.itemInfo where item_name=?;");
+            PreparedStatement myPStmt = myConn.prepareStatement("select price from hit.sales" +
+                    " where sales_id=(select sales_id from hit.item where item_name=?);");
             myPStmt.setString(1, item_name);
             myResultSet = myPStmt.executeQuery();
             while (myResultSet.next()) {
-                myMap.put("item_id",myResultSet.getInt("item_id"));
-                myMap.put("selling_price",myResultSet.getInt("selling_price"));
-                myMap.put("normal_price",myResultSet.getInt("selling_price"));
-
+               Price = myResultSet.getFloat("price");
             }
         } catch (Exception exc) {
             infoError(String.valueOf(exc), " TRY AGAIN");
         }
-        return (HashMap<String, Integer>) myMap;
+        return Price;
     }
 
-    public void setBillingTabel(String description, String name) {
+    public void setBillingTabel(String name) {
         try {
             Date date = new Date();
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             DateFormat timeFormat = new SimpleDateFormat("hh:mm:ss");
             //Selecting From the Data Base
-            PreparedStatement myPStmt = myConn.prepareStatement("insert into hit.billing(made_by,date,time,description_billing) values(?,?,?,?);");
+            PreparedStatement myPStmt = myConn.prepareStatement("insert into hit.billing(made_by,date,time) values(?,?,?);");
             myPStmt.setString(1, name);
             myPStmt.setString(2, String.valueOf(dateFormat.format(date)));
             myPStmt.setString(3, String.valueOf(timeFormat.format(date)));
-            myPStmt.setString(4, description);
             int RowsAffected = myPStmt.executeUpdate();
             if (RowsAffected >= 1) {
-                JOptionPane.showMessageDialog(null, "Success", "Success !!!", JOptionPane.INFORMATION_MESSAGE);
+              //  JOptionPane.showMessageDialog(null, "Success", "Success !!!", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception exc) {
             infoError(String.valueOf(exc), " TRY AGAIN");
         }
     }
 
-    public void updateQuantityTabel(int item_id, int quantity_entered) {
+    public void updateQuantityTabel(String item_name, int quantity_entered) {
 
         try {
             PreparedStatement myPStmt = myConn.prepareStatement("update hit.quantity set quantity=? where quantity_id =" +
                     "(select quantity_id from hit.item \n" +
-                    "where item_id = ?);");
+                    "where item_name = ?);");
             myPStmt.setInt(1, quantity_entered);
-            myPStmt.setInt(2, item_id);
-
+            myPStmt.setString(2, item_name);
             int RowsAffected = myPStmt.executeUpdate();
             if (RowsAffected >= 1) {
 
@@ -153,25 +150,41 @@ public class dbsBilling {
     }
 
 
-
-
     public int getBillingTabelID() {
         int Billing_id = -1;
-        try{
+        try {
             ResultSet rs;
-        PreparedStatement myPStmt = myConn.prepareStatement("SELECT * FROM hit.billing ORDER BY billing_id DESC LIMIT 1;");
-        rs = myPStmt.executeQuery();
-        while (rs.next()) {
-           Billing_id = rs.getInt("billing_id");
-        }
+            PreparedStatement myPStmt = myConn.prepareStatement("SELECT * FROM hit.billing ORDER BY billing_id DESC LIMIT 1;");
+            rs = myPStmt.executeQuery();
+            while (rs.next()) {
+                Billing_id = rs.getInt("billing_id");
+            }
 
-    } catch (Exception e) {
-        System.out.println("Exception" + e);
-    }
+        } catch (Exception e) {
+            System.out.println("Exception" + e);
+        }
         return Billing_id;
     }
 
 
+    public void setTotalAmountInBillingTable(int billing_id, float totalAmountInBillingTable, String customerName, String vehicelNo) {
+        try {
+            PreparedStatement myPStmt = myConn.prepareStatement("update hit.billing set amount=?,billing_type=?,customer_name=?,vehicle_no=? where billing_id =?");
+            myPStmt.setFloat(1, totalAmountInBillingTable);
+            myPStmt.setString(2, "normal");
+            myPStmt.setString(3, customerName);
+            myPStmt.setString(4, vehicelNo);
+            myPStmt.setInt(5, billing_id);
+            int RowsAffected = myPStmt.executeUpdate();
+            if (RowsAffected >= 1) {
+//success
+            }
+        } catch (Exception exc) {
+            infoError(String.valueOf(exc), " TRY AGAIN");
+        }
 
     }
+
+
+}
 

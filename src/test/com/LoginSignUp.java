@@ -37,8 +37,7 @@ public class LoginSignUp extends JFrame {
 
         try {
             // 1. Get a connection to database
-            myConn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/?user=login", "login", "hitesh123");
-
+            myConn = DriverManager.getConnection("jdbc:mysql://192.168.43.92:3306/?user=login", "login", "hitesh123");
             System.out.println("Database connection successful!\n");
 
             System.out.println("Creating statement...");
@@ -66,7 +65,11 @@ public class LoginSignUp extends JFrame {
         }
 
 
+
+
     }
+
+
 
 
     private void bLogin(ActionEvent evt) {
@@ -110,10 +113,6 @@ public class LoginSignUp extends JFrame {
                             this.setVisible(false);
                            // new MainPage().setVisible(true);
                             new MainPage(FirstName+" "+LastName,UserName,Phone_no,Accessparam , myConn ,myRs).setVisible(true);
-
-                            JOptionPane.showMessageDialog(this, "Manager Login \n " + FirstName + " "
-                                    + LastName);
-
 
 
                         } else {

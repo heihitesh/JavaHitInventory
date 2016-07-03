@@ -4,20 +4,19 @@ package test.com.HelperClasses;
  * Created by Nilesh Verma on 6/22/2016.
  */
 public class BillingItemInfo {
-    private String itemName , quantity, category;
-    int n_price ,s_price,total=100;
+    private String itemName , quantity;
+    float price,total;
     int sr;
 
-    public BillingItemInfo(int sr, String item_name, String quantity, String category, int n_price, int s_price, int total){
+    public BillingItemInfo(int sr, String item_name, String quantity, float price, float total){
 
         this.sr=sr;
         this.itemName = item_name;
         this.quantity = quantity;
-        this.category = category;
-        this.n_price = n_price;
-        this.s_price = s_price;
+        this.price = price;
         this.total = total;
     }
+
 
     public String getItemName(){
         return itemName;
@@ -25,13 +24,11 @@ public class BillingItemInfo {
     public String getQuantity(){
         return quantity;
     }
-    public String getCategory(){
-        return category;
-    }
     public String getTotal(){return String.valueOf(total);}
     public String getSr(){
         return String.valueOf(sr);
     }
-    public String getN_price(){ return String.valueOf(n_price);}
-    public String getS_price(){ return String.valueOf(s_price);}
+    public String getPrice() {
+        return String.valueOf(price);
+    }
 }

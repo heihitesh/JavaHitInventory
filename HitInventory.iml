@@ -11,5 +11,8 @@
     <orderEntry type="library" name="GroupLayout" level="project" />
     <orderEntry type="library" name="src" level="project" />
     <orderEntry type="library" name="mysql-connector-java-5.1.39-bin" level="project" />
+    <orderEntry type="library" name="ant-1.7.1" level="project" />
+    <orderEntry type="library" name="jasperreports-6.2.0" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

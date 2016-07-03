@@ -21,6 +21,8 @@ public class dbsBillingItemTabel {
     Connection myConn;
     //int Billing_id;
     JTable Billingtabel;
+    Float totalBillingAmount = Float.valueOf(0);
+
     public dbsBillingItemTabel(Connection myConn, JTable JTabelBillingItem) {
         this.myConn = myConn;
        // this.Billing_id = billing_id;
@@ -28,22 +30,30 @@ public class dbsBillingItemTabel {
         settingtheJTabelHeader(JTabelBillingItem);
     }
 
-    public void setBillingItemTabel(int billing_id, int item_id, int quantity_entered, String quantityUnit, String itemname, int selling_price, int normal_price) {
+    public Float getTotalBillingAmount() {
+        return totalBillingAmount;
+    }
+
+    public void setTotalAnalysisBilling() {
+        this.totalBillingAmount= Float.valueOf(0);
+    }
+
+    public void setBillingItemTabel(int billing_id, int quantity_entered, String quantityUnit,
+                                    String itemname, float price) {
         try {
             //Selecting From the Data Base
-            PreparedStatement myPStmt = myConn.prepareStatement("insert into hit.billingitemselected(billing_id,item_id," +
-                    "item_name,normal_price,selling_price,quantity,quantity_unit) values(?,?,?,?,?,?,?);");
+            PreparedStatement myPStmt = myConn.prepareStatement("insert into hit.billingitemselected(billing_id," +
+                    "item_name,price,quantity,quantity_unit,total) values(?,?,?,?,?,?);");
             myPStmt.setInt(1, billing_id);
-            myPStmt.setInt(2, item_id);
-            myPStmt.setString(3, itemname);
-            myPStmt.setInt(4, normal_price);
-            myPStmt.setInt(5, selling_price);
-            myPStmt.setInt(6, quantity_entered);
-            myPStmt.setString(7, quantityUnit);
+            myPStmt.setString(2, itemname);
+            myPStmt.setFloat(3, price);
+            myPStmt.setInt(4, quantity_entered);
+            myPStmt.setString(5, quantityUnit);
+            myPStmt.setFloat(6, quantity_entered*price);
 
             int RowsAffected = myPStmt.executeUpdate();
             if (RowsAffected >= 1) {
-                JOptionPane.showMessageDialog(null, "Success", "Success !!!", JOptionPane.INFORMATION_MESSAGE);
+              //  JOptionPane.showMessageDialog(null, "Success", "Success !!!", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception exc) {
             infoError(String.valueOf(exc), " TRY AGAIN");
@@ -54,6 +64,7 @@ public class dbsBillingItemTabel {
 
         ArrayList<BillingItemInfo> itemBilling = new ArrayList<BillingItemInfo>();
         ResultSet rs;
+
         try {
             PreparedStatement myPStmt = myConn.prepareStatement("SELECT * FROM hit.billingitemselected where billing_id=?");
             myPStmt.setInt(1, billing_id);
@@ -62,8 +73,9 @@ public class dbsBillingItemTabel {
             int count = 0;
             while (rs.next()) {
                 billingItem = new BillingItemInfo(count + 1, rs.getString("item_name"), rs.getString("quantity"),
-                        "cat", rs.getInt("normal_price"), rs.getInt("selling_price"), 10000);
+                         rs.getFloat("price"),rs.getFloat("total"));
                 itemBilling.add(billingItem);
+                totalBillingAmount = totalBillingAmount + rs.getFloat("total");
                 count++;
             }
 
@@ -78,15 +90,13 @@ public class dbsBillingItemTabel {
     public void Show_Info_In_BillingTable(int billing_id) {
         ArrayList<BillingItemInfo> list = getItemTabelList(billing_id);
         DefaultTableModel model = (DefaultTableModel) Billingtabel.getModel();
-        Object[] row = new Object[7];
+        Object[] row = new Object[5];
         for (int i = 0; i < list.size(); i++) {
             row[0] = list.get(i).getSr();
             row[1] = list.get(i).getItemName();
             row[2] = list.get(i).getQuantity();
-            row[3] = list.get(i).getCategory();
-            row[4] = list.get(i).getN_price();
-            row[5] = list.get(i).getS_price();
-            row[6] = list.get(i).getTotal();
+            row[3] = list.get(i).getPrice();
+            row[4] = list.get(i).getTotal();
             model.addRow(row);
 
         }
@@ -100,7 +110,7 @@ public class dbsBillingItemTabel {
 
                 },
                 new String[]{
-                        "Sr.no", "Item Name", "Quantity", "Category", "Normal Price", "Selling Price", "Total"
+                        "Sr.no", "Item Name", "Quantity","Price","Total"
                 }
         ));
 
@@ -111,4 +121,39 @@ public class dbsBillingItemTabel {
         model.setRowCount(0);
         Show_Info_In_BillingTable(billing_id);
     }
+
+    public void deleteItemFormItemTable(String itemBillingName, int billing_id) {
+        try{
+            PreparedStatement myPStmt = myConn.prepareStatement("delete from hit.billingitemselected where item_name=? and billing_id=? ;");
+            myPStmt.setString(1, itemBillingName);
+            myPStmt.setInt(2, billing_id);
+            int RowsAffected = myPStmt.executeUpdate();
+            if (RowsAffected >= 1) {
+//success
+            }
+        } catch (Exception exc) {
+            infoError(String.valueOf(exc), " TRY AGAIN");
+        }
+    }
+
+    public void UpdateQtyandTotalBillingItemTable(int updateQty, Float updatePrice, String itemBillingName, int billing_id) {
+
+            try {
+                PreparedStatement myPStmt = myConn.prepareStatement("update hit.billingitemselected set quantity=?,total=? " +
+                        "where item_name=? and billing_id=?;");
+                myPStmt.setInt(1, updateQty);
+                myPStmt.setFloat(2, updatePrice*updateQty);
+                myPStmt.setString(3, itemBillingName);
+                myPStmt.setInt(4, billing_id);
+                int RowsAffected = myPStmt.executeUpdate();
+                if (RowsAffected >= 1) {
+                    //success
+                }
+            } catch (Exception exc) {
+                infoError(String.valueOf(exc), " TRY AGAIN");
+            }
+    }
+
+
+
 }

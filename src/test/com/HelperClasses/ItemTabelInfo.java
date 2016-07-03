@@ -4,18 +4,17 @@ package test.com.HelperClasses;
  * Created by Nilesh Verma on 6/20/2016.
  */
 public class ItemTabelInfo {
-    private String date, addedBy, desc , Itemname ,catagory , quantity,normalPrice,SellingPrice;
+    private String date, addedBy, desc , Itemname ,catagory , quantity,Price;
     int sr;
 
     public ItemTabelInfo(int sr, String item_name, String category_name, String quantity, String added_by,
-                         String date, String normalPrice, String sellingPrice, String desc){
+                         String date, String Price, String desc){
         this.Itemname = item_name;
         this.catagory = category_name;
         this.quantity = quantity;
         this.addedBy = added_by;
         this.date = date;
-        this.normalPrice = normalPrice;
-        this.SellingPrice = sellingPrice;
+        this.Price = Price;
         this.desc = desc;
         this.sr = sr;
     }
@@ -41,10 +40,7 @@ public class ItemTabelInfo {
     public String getQuantity(){
         return quantity;
     }
-    public String getNormalPrice(){
-        return normalPrice;
-    }
-    public String getSellingPrice(){
-        return SellingPrice;
+    public String getPrice(){
+        return Price;
     }
 }
